@@ -49,6 +49,8 @@
             return;
         }
 
+        $('#spinner').removeAttr('hidden');
+
         $.ajax('/Home/GetResults', {
             data: ko.toJSON({ keywords: this.keywords, targetUrl: this.targetUrl }),
             type: 'post', contentType: 'application/json',
@@ -65,6 +67,7 @@
 
                 self.reset();
                 self.responseText(data.ResponseText);
+                $('#spinner').attr('hidden', 'hidden');
             },
             error: function (er) {
                 self.search.isError(true);

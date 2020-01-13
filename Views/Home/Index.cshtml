@@ -1,5 +1,5 @@
-﻿{
-    @ViewBag.Title = "Seach Results"
+﻿@{
+    ViewBag.Title = "Seach Results";
 }
 
 <div class="header-div">
@@ -23,6 +23,9 @@
 
 <hr />
 
+<div id="spinner" class="spinner-border text-primary" role="status" hidden>
+    <span class="sr-only">Loading...</span>
+</div>
 <div data-bind="if: hasClicked">
     <div data-bind="if: search.isError">
         <div>
