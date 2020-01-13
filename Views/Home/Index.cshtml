@@ -1,0 +1,47 @@
+﻿{
+    @ViewBag.Title = "Seach Results"
+}
+
+<div class="header-div">
+    <h3>Google Search Results</h3>
+</div>
+
+<form data-bind="submit: getResults">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <input type="text" class="form-control" data-bind="textInput: keywords, css: { 'is-valid': keywords.isModified() && keywords.isValid() }" placeholder="Keywords" />
+        </div>
+        <div class="form-group col-md-6">
+            <input type="text" class="form-control" data-bind="textInput: targetUrl, css: { 'is-valid': targetUrl.isModified() && targetUrl.isValid() }" placeholder="Target URL" />
+        </div>
+    </div>
+
+    <div class="w-50">
+        <button type="submit" class="btn btn-primary" data-bind="disable: hasErrors">Search</button>
+    </div>
+</form>
+
+<hr />
+
+<div data-bind="if: hasClicked">
+    <div data-bind="if: search.isError">
+        <div>
+            There was an error retrieving the data.  Please try again.
+        </div>
+    </div>
+    <div data-bind="ifnot: search.isError">
+        <div data-bind="ifnot: hasResults">
+            <div>
+                No Results Found
+            </div>
+        </div>
+        <div data-bind="if: hasResults">
+            <div class="list-header">
+                <span data-bind="text: search.results().length"></span> Results Found (Keywords: "<span data-bind="text: search.keywords"></span>", Target URL: <span data-bind="text: search.targetUrl"></span>):
+            </div>
+            <ul class="list-group w-50" data-bind="foreach: search.results">
+                <li class="list-group-item">#<span data-bind="text: Number"></span> - <a data-bind="attr: { title: Url, href: Url }, text: Url"></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
